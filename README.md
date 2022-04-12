@@ -6,4 +6,4 @@ Gráficos inicialmente criados conforme especificação da tarefa #12516
 
 Sugere-se ao iniciar o desenvolvimento no cliente, criar uma coleção conforme o seguinte exemplo de estrutura:
 
-[/colecao_metabase.png]
+![Exemplo de Estrutura de Coleção](/colecao_metabase.png)
