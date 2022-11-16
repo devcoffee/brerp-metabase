@@ -6,7 +6,7 @@ left join c_bankaccount ba on ba.c_bankaccount_id = p.c_bankaccount_id
     WHERE 
         p.docstatus IN  ('CO', 'CL','RE','VO')
     AND        
-            ba.cof_ComposesCashFlow = 'N'  
+            ba.cof_ComposesCashFlow = 'Y'  
     AND
         ba.isactive='Y'
 AND
