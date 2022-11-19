@@ -12,9 +12,9 @@ WITH pagamentos as (
     SELECT 
         CASE 
             WHEN p.isReceipt = 'Y' THEN 
-                p.payamt 
+                 currencyconvert(p.payamt , p.c_currency_id, 297::numeric, p.datetrx::date::timestamp with time zone, p.c_conversiontype_id, p.ad_client_id, p.ad_org_id)
             ELSE 
-                p.payamt * -1 
+                 currencyconvert((  p.payamt * -1 ), p.c_currency_id, 297::numeric, p.datetrx::date::timestamp with time zone, p.c_conversiontype_id, p.ad_client_id, p.ad_org_id)
         END as Valor,
         CASE 
             WHEN p.isreconciled = 'N'  THEN
