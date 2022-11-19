@@ -1,6 +1,6 @@
 /*
 ######################################################################################################################################
-GRAFICO: Saldo geral de caixas e Bancos
+GRAFICO: Saldos por conta Bancária
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, de contas que compõem fluxo de caixa, classificando 
 o saldo conciliado, não conciliado e projetado(conciliado + não conciliado)  agrupando por conta corrente e organização. 

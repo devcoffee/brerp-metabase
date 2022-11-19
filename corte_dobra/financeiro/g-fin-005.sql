@@ -1,6 +1,6 @@
 /*
 ######################################################################################################################################
-GRAFICO: Contas a receberD-7 até D+7
+GRAFICO: Contas a receber - vencimento D-7 até D+7
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Lista os itens em aberto a recer, convertidos para moeda corrente(R$), vencidos até 7 dias e a vencer até 7 dias  e que componham 
 fluxo de caixa,descartando os  memorando de créditos (valor >0).
