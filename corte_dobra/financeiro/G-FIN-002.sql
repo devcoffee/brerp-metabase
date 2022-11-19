@@ -7,18 +7,19 @@ o saldo acumulado das empresas.
 O Filtro ocorre apenas pela empresa, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */
+
 select 
-     sum(p.payamt) 
+     sum( currencyconvert(p.payamt , p.c_currency_id, 297::numeric, p.datetrx::date::timestamp with time zone, p.c_conversiontype_id, p.ad_client_id, p.ad_org_id))
 from 
      rv_payment p 
 left join c_bankaccount ba on ba.c_bankaccount_id = p.c_bankaccount_id
     WHERE 
         p.docstatus IN  ('CO', 'CL','RE','VO')
-    AND        
-            ba.cof_ComposesCashFlow = 'Y'  
+    AND
+        ba.cof_ComposesCashFlow = 'Y'  
     AND
         ba.isactive='Y'
 AND
      p.ad_client_id = (SELECT s.ad_client_id
                   from ad_session s 
-                  where s.ad_session_id = {{LOGON}})     
+                  where s.ad_session_id = {{LOGON}})        
