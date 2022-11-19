@@ -5,6 +5,7 @@ AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Lista os itens em aberto a pagar, convertidos para moeda corrente(R$), vencidos até 7 dias e a vencer até 7 dias  e que 
 componham fluxo de caixa, descartando os  memorando de créditos (valor >0).
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
 

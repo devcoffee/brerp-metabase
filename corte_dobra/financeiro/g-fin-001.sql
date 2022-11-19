@@ -5,6 +5,7 @@ AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, de contas que compõem fluxo de caixa, classificando 
 o saldo conciliado, não conciliado e projetado(conciliado + não conciliado)  agrupando por conta corrente e organização. 
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
 

@@ -2,7 +2,7 @@
 ######################################################################################################################################
 GRAFICO: Rol de Clientes em aberto - Geral
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Agrupa os valores em aberto de Itens AR, que compõem fluxo de caixa , tratando operações em multimoeda. Descarta memorandos de crédito cliente.
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */
@@ -20,8 +20,6 @@ AND
     oi.cof_ComposesCashFlow = 'Y'
 AND 
     oi.cof_openamtconverted >0
---AND 
-  --   oi.daysdue > 1
 AND
      oi.ad_client_id = (SELECT s.ad_client_id
                   from ad_session s 

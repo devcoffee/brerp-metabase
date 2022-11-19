@@ -2,7 +2,7 @@
 ######################################################################################################################################
 GRAFICO: Análises de créditos dos últimos 90 dias
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Lista as análises de créditos realizadas nos ultimos 90 dias exibindo os no dia da análise, concedidos na análise e atual
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */

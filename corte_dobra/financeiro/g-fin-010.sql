@@ -2,8 +2,9 @@
 ######################################################################################################################################
 GRAFICO: Contas a Pagar vencendo hoje
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: fetua a somatória de todos os  itens em aberto AP, agrupado por parceiro de negócio, vendoendo no dia corrente e considerando os registros que consideream compõem fluxo de caixa 
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
 
@@ -19,7 +20,7 @@ WHERE
 AND
     oi.cof_ComposesCashFlow = 'Y'
 AND 
-    oi.cof_openamtconverted >0
+    oi.cof_openamtconverted >0 -- desconsidera memorando de créditos 
 AND 
      oi.daysdue=0
 AND

@@ -2,13 +2,14 @@
 ######################################################################################################################################
 GRAFICO: Faturamento dia Corrente - Clientes
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Apura o faturamento de mercadoria do dia, considerando apenas o valor de mercadoria(não inclui impostos não inclusos, fretes, despeesas e seguros),
+descarta devoluções, inclui apenas documentos que exibe de em relatórios
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratados para operações em multimoeda 
 ######################################################################################################################################
 */
 
 SELECT
-    --TDD.name as TDDname,
     bp.name as BPname,
     sum(il.cof_linenetamtconverted*i.multiplier) AS valor_total
 FROM 
@@ -22,19 +23,16 @@ LEFT JOIN
 where
     il.isdescription = 'N' 
 and
-    i.dateinvoiced =date_trunc('month',current_date)
---and 
---    il.linenetamt > 0
+    trunc(i.dateinvoiced) =trunc(now())
 and 
     i.issotrx = 'Y'
 and 
     i.docstatus IN ('CO','CL')
 and 
-    il.m_product_id > 0
+    il.m_product_id > 0 -- descarta linhas que nao tenha produto amarrado
 and 
     i.cof_ExibirEmRelatorios = 'Y'
---AND 
--- il.m_product_id IS NOT NULL -- Faturas que possuem linha
+
 AND
    tdd.DocBaseType IN ('ARI' ) -- filtra tipo de documento Normal e devolução
 AND
@@ -42,7 +40,6 @@ AND
                   from ad_session s 
                   where s.ad_session_id = {{LOGON}})
 group by 
-  --TDDname,
   BPname
 order by 
   valor_total desc

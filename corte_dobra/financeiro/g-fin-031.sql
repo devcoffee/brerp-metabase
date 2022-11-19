@@ -2,7 +2,8 @@
 ######################################################################################################################################
 GRAFICO: Clientes com Limite de Crédito Acima de 80%
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Lista Parceiros de negócio classificados como cliente, que NÂO estejam como sem verificação de crédito e que o limite 
+de crédito utilizado é maior que 80% do total concedido
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */
@@ -31,7 +32,7 @@ FROM
 where 
     bp.TotalOpenBalance > (bp.so_creditlimit* 0.8) 
 and 
-    bp.TotalOpenBalance>0 
+    bp.TotalOpenBalance>=0 
 and 
     bp.SOCreditStatus<>'X' 
 AND

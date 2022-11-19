@@ -2,7 +2,8 @@
 ######################################################################################################################################
 GRAFICO:Contas Receber através Boleto sem Atribuição - Dt. Faturada < Hoje
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Lista contas a receber em aberto, que possuem custódia indicativa de cobrança por CNAB  e que não estejam amarradas em 
+nenhuma operação com emissão de CNAB, listando itens com  data de faturamento  anterior ao dia corrente
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */
@@ -12,13 +13,13 @@ select
     c.name as custodia,
     SUM(CASE
         WHEN oi.daysdue <= 0 then
-            oi.openamt
+            oi.cof_openamtconverted
         ELSE
             0
     END) as valor_vencer,
     SUM(CASE
         WHEN oi.daysdue > 0 then
-            oi.openamt
+            oi.cof_openamtconverted
         ELSE
             0
     END) as valor_vencido

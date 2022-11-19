@@ -2,8 +2,9 @@
 ######################################################################################################################################
 GRAFICO:Recebimentos não alocados
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Lista  e soma os saldos dos pagamentos (AR) com saldos a alocar, completados e fechados.
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratatos para  conversão em operações de multimoeda.
 ######################################################################################################################################
 */
 

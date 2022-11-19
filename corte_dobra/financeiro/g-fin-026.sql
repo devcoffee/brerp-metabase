@@ -2,7 +2,8 @@
 ######################################################################################################################################
 GRAFICO: Recebimentos Realizados - D -1
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Pagamentos AR que foram realizado aterior ao dia corrente, tratando as operações multimoedas e filtrando documentos 
+completados e fechados. São descartados operações onde o TDD refere-se a operações de transferência entre contas 
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */

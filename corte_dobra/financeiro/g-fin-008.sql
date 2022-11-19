@@ -2,8 +2,11 @@
 ######################################################################################################################################
 GRAFICO: Saldos Bancários por tipo de conta
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, de contas que compõem fluxo de caixa, classificando 
+o saldo conciliado, não conciliado e projetado(conciliado + não conciliado)  agrupando por conta corrente, organização e classificação
+da conta bancária (Dinheiro, cheque, conta corrente e poupança)
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
 
@@ -11,9 +14,10 @@ WITH pagamentos as (
     SELECT 
         CASE 
             WHEN p.isReceipt = 'Y' THEN 
-                p.payamt 
+            --Trata a multimoeda do  pagamento
+                 currencyconvert(p.payamt , p.c_currency_id, 297::numeric, p.datetrx::date::timestamp with time zone, p.c_conversiontype_id, p.ad_client_id, p.ad_org_id)
             ELSE 
-                p.payamt * -1 
+                 currencyconvert((  p.payamt * -1 ), p.c_currency_id, 297::numeric, p.datetrx::date::timestamp with time zone, p.c_conversiontype_id, p.ad_client_id, p.ad_org_id)
         END as Valor,
         CASE 
             WHEN p.isreconciled = 'N'  THEN
@@ -25,8 +29,6 @@ WITH pagamentos as (
         org.name as orgname,
         bb.name as BancoName,
         (select t.Name from ad_ref_list_trl t left join ad_ref_list l on t.ad_ref_list_id = l.ad_ref_list_id where l.AD_Reference_ID='216' and l.value=ba.BankAccountType and t.ad_language = 'pt_BR') as tipoconta
-        --ba.BankAccountType as tipoconta
-
     FROM 
         C_Payment p 
     LEFT JOIN

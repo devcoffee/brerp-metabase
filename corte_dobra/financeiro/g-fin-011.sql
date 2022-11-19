@@ -2,8 +2,9 @@
 ######################################################################################################################################
 GRAFICO:Contas a pagar em aberto (Risco)
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS::Efetua a somatória de todos os  itens em aberto AP, considerando os registros que consideream compõem fluxo de caixa 
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
 
@@ -16,10 +17,6 @@ WHERE
     oi.issotrx = 'N'
 AND
     oi.cof_ComposesCashFlow = 'Y'
---AND 
---    oi.cof_openamtconverted >0
---AND 
---     oi.daysdue > 3 
 AND
      oi.ad_client_id = (SELECT s.ad_client_id
                   from ad_session s 

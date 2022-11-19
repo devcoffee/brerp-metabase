@@ -2,8 +2,10 @@
 ######################################################################################################################################
 GRAFICO: Compras e obrigações lançada no dia Corrente
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: lista lançamentos de contas a pagar  realizados no dia, descartando  memorandos de créditos, considerando documentos 
+completados e fechados e apenas que exibem em relatórios.
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
 
@@ -12,8 +14,6 @@ SELECT
     sum(il.cof_linenetamtconverted*i.multiplier) AS valor_total
 FROM 
     rv_c_invoice i
---LEFT JOIN
---    c_bpartner bp ON bp.c_bpartner_id = i.c_bpartner_id
 LEFT JOIN C_DocType tdd ON
     (tdd.c_doctype_id = i.c_doctypetarget_id)
 LEFT JOIN
@@ -21,19 +21,13 @@ LEFT JOIN
 where
     il.isdescription = 'N' 
 and
-    i.dateinvoiced =date_trunc('month',current_date)
---and 
---    il.linenetamt > 0
+    trunc(i.dateinvoiced) =trunc(now())
 and 
     i.issotrx = 'N'
 and 
-    i.docstatus IN ('CO','CL')
---and 
---  il.m_product_id > 0
+    i.docstatus IN ('CO','CL') -- completado e fechado
 and 
-    i.cof_ExibirEmRelatorios = 'Y'
---AND 
--- il.m_product_id IS NOT NULL -- Faturas que possuem linha
+    i.cof_ExibirEmRelatorios = 'Y' -- exibe em relatórios
 AND
    tdd.DocBaseType IN ('API' ) -- filtra tipo de documento Normal e devolução
 AND

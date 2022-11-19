@@ -2,8 +2,9 @@
 ######################################################################################################################################
 GRAFICO: Devoluções e Créditos  Faturamento dia corrente
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
-O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+COMENTÁRIOS: : Apura a devolução de vendas de mercadoria do dia, considerando apenas o valor de mercadoria(não inclui impostos não inclusos, fretes, despeesas e seguros),
+ inclui apenas documentos que exibe de em relatórios.O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+Valores tratados para operações em multimoeda 
 ######################################################################################################################################
 */
 SELECT
@@ -21,7 +22,7 @@ LEFT JOIN
 where
     il.isdescription = 'N' 
 and
-    i.dateinvoiced =date_trunc('month',current_date)
+    trunc(i.dateinvoiced) =trunc(now())
 --and 
 --    il.linenetamt > 0
 and 

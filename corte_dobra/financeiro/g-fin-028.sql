@@ -2,8 +2,9 @@
 ######################################################################################################################################
 GRAFICO:Contas Receber por Custódia
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
-O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+COMENTÁRIOS:  Lista os itens em Aberto AR, agrupando por custódia, classificando valores vencidos e a vencer  e que compõem fluxo caixa
+O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.Tradado operações 
+em multimoeda.
 ######################################################################################################################################
 */
 
@@ -11,13 +12,13 @@ select
     c.name as custodia,
     SUM(CASE
         WHEN oi.daysdue <= 0 then
-            oi.openamt
+            oi.cof_openamtconverted
         ELSE
             0
     END) as valor_vencer,
     SUM(CASE
         WHEN oi.daysdue > 0 then
-            oi.openamt
+            oi.cof_openamtconverted
         ELSE
             0
     END) as valor_vencido

@@ -2,7 +2,7 @@
 ######################################################################################################################################
 GRAFICO:Rol de clientes em atraso >= 2 dias 
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Agrupa por cliente os valores em atraso >= 2dias, considerando apenas itens que compõem fluxo de caixa.
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */

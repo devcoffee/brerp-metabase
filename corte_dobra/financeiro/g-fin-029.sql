@@ -2,8 +2,9 @@
 ######################################################################################################################################
 GRAFICO: Títulos Bancários por Tipo Integração
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
-O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+COMENTÁRIOS: Lista os itens AR que estão alocados em operações bancárias classificando  nos tipos de carteira (descontada, simples, viculada etc)
+O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.Tradado operações 
+em multimoeda.
 ######################################################################################################################################
 */
 
@@ -13,17 +14,17 @@ select
              where l.AD_Reference_ID='1500231' and l.value=oi.cof_BillFoldType and t.ad_language = 'pt_BR') as tipoCarteira,
     SUM(CASE
         WHEN oi.daysdue <= 0 then
-            oi.openamt
+            oi.cof_openamtconverted
         ELSE
             0
     END) as valor_vencer,
     SUM(CASE
         WHEN oi.daysdue > 0 then
-            oi.openamt
+            oi.cof_openamtconverted
         ELSE
             0
     END) as valor_vencido,
-    sum(oi.openamt) as total
+    sum(oi.cof_openamtconverted) as total
 FROM
     rv_openitem oi 
 LEFT JOIN

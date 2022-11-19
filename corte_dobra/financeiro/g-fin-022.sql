@@ -2,7 +2,8 @@
 ######################################################################################################################################
 GRAFICO:Rol de Fornecedores em atraso >= 2 dias
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: 
+COMENTÁRIOS: Agrupa os valores em aberto de Itens AP, que compõem fluxo de caixa , tratando operações em multimoeda e que  estão vencidos >=2 dias,
+descarta os memorando de créditos formecedor.
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */
