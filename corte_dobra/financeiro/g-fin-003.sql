@@ -4,7 +4,8 @@ GRAFICO: Contas a pagar em atraso >= 2 dias
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Lista os itens em aberto a pagar, convertidos para moeda corrente(R$), vencidos>=2 dias  e que componham fluxo de caixa, 
 descartando os  memorando de créditos (valor >0).
-O Filtro ocorre apenas pela empresa, assim os valore refletem a consolidação de todas as Organizações.
+O Filtro ocorre apenas pela empresa, assim osO Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
+ valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */
 

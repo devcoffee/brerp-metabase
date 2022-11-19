@@ -1,28 +1,23 @@
 /*
 ######################################################################################################################################
-GRAFICO: Contas a pagar em atraso D-7 até D+7
+GRAFICO:Recebimentos não alocados
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: Lista os itens em aberto a pagar, convertidos para moeda corrente(R$), vencidos até 7 dias e a vencer até 7 dias  e que 
-componham fluxo de caixa, descartando os  memorando de créditos (valor >0).
+COMENTÁRIOS: 
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
 ######################################################################################################################################
 */
 
 select
-  sum(oi.cof_openamtconverted)
-   
+  sum(paymentavailable(pay.c_payment_id))
 FROM
-    rv_openitem oi
+    C_Payment pay
 WHERE
-    oi.issotrx = 'N'
-AND
-    oi.cof_ComposesCashFlow = 'Y'
+    pay.docstatus in ('CO', 'CL') 
 AND 
-    oi.cof_openamtconverted >0
+    pay.isreceipt = 'Y' 
 AND 
-     (duedate > now()-7 and duedate < now() + 7 )
-  
+    paymentavailable(pay.c_payment_id) > 0
 AND
-     oi.ad_client_id = (SELECT s.ad_client_id
+     pay.ad_client_id = (SELECT s.ad_client_id
                   from ad_session s 
                   where s.ad_session_id = {{LOGON}})        
