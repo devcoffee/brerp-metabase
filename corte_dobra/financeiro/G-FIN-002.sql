@@ -1,9 +1,11 @@
 /*
+######################################################################################################################################
 GRAFICO: Saldo geral de caixas e Bancos
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Soma os pagamentos completados, fechados , estornados e  anulados, de contas que compõem fluo de caixa para criar
 o saldo acumulado das empresas. 
 O Filtro ocorre apenas pela empresa, assim os valore refletem a consolidação de todas as Organizações.
+######################################################################################################################################
 */
 select 
      sum(p.payamt) 

@@ -1,9 +1,11 @@
 /*
+######################################################################################################################################
 GRAFICO: Saldo geral de caixas e Bancos
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Soma os pagamentos completados, fechados , estornados e  anulados, de contas que compõem flux de caixa para criar
 o saldo conciliado, não conciliado e projetado(conciliado e não conciliado),  agrupando por conta corrente e organização. 
 O Filtro ocorre apenas pela empresa, assim os valore refletem a consolidação de todas as Organizações.
+######################################################################################################################################
 */
 
 WITH pagamentos as (
