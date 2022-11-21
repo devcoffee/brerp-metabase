@@ -10,24 +10,26 @@ Valores tratatos para  conversão em operações de multimoeda
 */
 
 SELECT
-    TDD.name,
+    bp.name,
     sum(il.cof_linenetamtconverted*i.multiplier) AS valor_total
 FROM 
     rv_c_invoice i
+LEFT JOIN
+    c_bpartner bp ON bp.c_bpartner_id = i.c_bpartner_id
 LEFT JOIN C_DocType tdd ON
-    (tdd.c_doctype_id = i.c_doctypetarget_id)
+   (tdd.c_doctype_id = i.c_doctypetarget_id)
 LEFT JOIN
     rv_c_invoiceline il ON i.c_invoice_id = il.c_invoice_id
 where
     il.isdescription = 'N' 
 and
-    trunc(i.dateinvoiced) =trunc(now())
+    trunc(i.dateinvoiced) = trunc(now())
 and 
     i.issotrx = 'N'
 and 
-    i.docstatus IN ('CO','CL') -- completado e fechado
+    i.docstatus IN ('CO','CL')
 and 
-    i.cof_ExibirEmRelatorios = 'Y' -- exibe em relatórios
+    i.cof_ExibirEmRelatorios = 'Y'
 AND
    tdd.DocBaseType IN ('API' ) -- filtra tipo de documento Normal e devolução
 AND
@@ -35,7 +37,7 @@ AND
                   from ad_session s 
                   where s.ad_session_id = {{LOGON}})
 group by 
-  tdd.name
+  bp.name
 order by 
   valor_total desc
     
