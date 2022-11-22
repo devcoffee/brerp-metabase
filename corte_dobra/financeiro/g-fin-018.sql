@@ -1,6 +1,6 @@
 /*
 ######################################################################################################################################
-GRAFICO:Compras e obrigações lançadas dia Corrente - Tipo Operação
+GRAFICO:CDevoluções e Créditos  Faturamento dia corrente
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Lista e agrupa por tipo de documento as devoluções AP lançadas no dia corrrente, para documentos completados e fechados,
 que devem ser exibidos em relatório , independente se possuem produtos ou finalidades na linhas.
