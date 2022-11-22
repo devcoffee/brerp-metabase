@@ -98,6 +98,8 @@ AND
                         ba.ad_org_id IN (5000000) 
            WHEN {{TipoP}}='03' then 
                         ba.ad_org_id IN (5000004) 
+           WHEN {{TipoP}}='98' then 
+                        ba.ad_org_id IN (5000000,1000001)
            else 
                         ba.ad_org_id IN (5000004,5000000,1000001)
            end )     

@@ -2,11 +2,10 @@
 ######################################################################################################################################
 GRAFICO: Saldos Bancários por tipo de conta
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, de contas que compõem fluxo de caixa, classificando 
-o saldo conciliado, não conciliado e projetado(conciliado + não conciliado)  agrupando por conta corrente, organização e classificação
-da conta bancária (Dinheiro, cheque, conta corrente e poupança)
-O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
-Valores tratatos para  conversão em operações de multimoeda
+COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, classificando o saldo conciliado, não conciliado e 
+projetado(conciliado + não conciliado)  agrupando por conta corrente, organização e classificação da conta bancária (Dinheiro, cheque, conta corrente e poupança)
+O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.Valores tratatos para  conversão em operações de multimoeda
+
 ######################################################################################################################################
 */
 
@@ -40,8 +39,8 @@ WITH pagamentos as (
         ad_org org  on org.ad_org_id=ba.ad_org_id
     WHERE 
         p.docstatus IN  ('CO', 'CL','RE','VO')
-    AND
-        ba.cof_ComposesCashFlow = 'Y' 
+    --AND
+      --  ba.cof_ComposesCashFlow = 'Y' 
     AND
         ba.isactive='Y'
 AND

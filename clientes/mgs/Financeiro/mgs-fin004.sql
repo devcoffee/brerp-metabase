@@ -1,6 +1,6 @@
 /*
 ######################################################################################################################################
-GRAFICO: Contas pagar Duas semanas -  D-7 até D+7
+GRAFICO: Contas a pagar em atraso D-7 até D+7
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Lista os itens em aberto a pagar, convertidos para moeda corrente(R$), vencidos até 7 dias e a vencer até 7 dias  e que 
 componham fluxo de caixa, descartando os  memorando de créditos (valor >0).
@@ -23,7 +23,16 @@ AND
 AND 
      (duedate > now()-7 and duedate < now() + 7 )
   
+
 AND
-     oi.ad_client_id = (SELECT s.ad_client_id
-                  from ad_session s 
-                  where s.ad_session_id = {{LOGON}})        
+     (case WHEN {{TipoP}}='01' then 
+                        oi.ad_org_id IN (1000001) 
+           WHEN {{TipoP}}='02' then 
+                        oi.ad_org_id IN (5000000) 
+           WHEN {{TipoP}}='03' then 
+                        oi.ad_org_id IN (5000004) 
+           WHEN {{TipoP}}='98' then 
+                        oi.ad_org_id IN (5000000,1000001) 
+           else 
+                        oi.ad_org_id IN (5000004,5000000,1000001)
+           end )     

@@ -1,14 +1,12 @@
 /*
 ######################################################################################################################################
-GRAFICO: Saldos por conta Bancária
+GRAFICO: Saldos Bancários por tipo de conta
 AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, de contas que compõem fluxo de caixa, classificando 
-o saldo conciliado, não conciliado e projetado(conciliado + não conciliado)  agrupando por conta corrente e organização. 
-O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
-Valores tratatos para  conversão em operações de multimoeda
+COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, classificando o saldo conciliado, não conciliado e 
+projetado(conciliado + não conciliado)  agrupando por conta corrente, organização e classificação da conta bancária (Dinheiro, cheque, conta corrente e poupança)
+O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
-
 WITH pagamentos as (
     SELECT 
         CASE 
@@ -25,7 +23,8 @@ WITH pagamentos as (
         END as Tipo,
         ba.name as Conta,
         org.name as orgname,
-        bb.name as BancoName
+        bb.name as BancoName,
+        (select t.Name from ad_ref_list_trl t left join ad_ref_list l on t.ad_ref_list_id = l.ad_ref_list_id where l.AD_Reference_ID='216' and l.value=ba.BankAccountType and t.ad_language = 'pt_BR') as tipoconta
     FROM 
         C_Payment p 
     LEFT JOIN
@@ -37,26 +36,32 @@ WITH pagamentos as (
         ad_org org  on org.ad_org_id=ba.ad_org_id
     WHERE 
         p.docstatus IN  ('CO', 'CL','RE','VO')
-    --AND
-       -- ba.cof_ComposesCashFlow = 'Y' 
     AND
         ba.isactive='Y'
-AND
-     p.ad_client_id = (SELECT s.ad_client_id
-                  from ad_session s 
-                  where s.ad_session_id = {{LOGON}})        
+    AND
+         (case WHEN {{TipoP}}='01' then 
+                        ba.ad_org_id IN (1000001) 
+           WHEN {{TipoP}}='02' then 
+                        ba.ad_org_id IN (5000000) 
+           WHEN {{TipoP}}='03' then 
+                        ba.ad_org_id IN (5000004) 
+           WHEN {{TipoP}}='98' then 
+                        ba.ad_org_id IN (5000000,1000001) 
+           else 
+           
+                        ba.ad_org_id IN (5000004,5000000,1000001)
+        end )     
 )
+
 SELECT 
-    p.BancoName as banco,
-    p.orgname,
-    p.conta,
+    
     sum(case when p.Tipo='CC' then p.valor else 0 end) as  "Valor Conciliado",
     sum(case when p.tipo='NCC' then p.valor  else 0 end) as "Valor Não Conciliado",
-    sum(p.valor) as "Saldo Projetado" 
-    
+    sum(p.valor) as "Saldo Projetado" ,
+    p.tipoconta
 FROM 
     pagamentos p
 GROUP by
-       p.orgname, banco,p.conta
+      p.tipoconta
 ORDER BY
-    p.orgname, banco,p.conta,"Saldo Projetado" asc
+   "Saldo Projetado" asc

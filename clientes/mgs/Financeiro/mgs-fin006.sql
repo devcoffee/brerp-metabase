@@ -1,4 +1,5 @@
 /*
+
 ######################################################################################################################################
 GRAFICO: Contas a receber em atraso >= 2 dias
 AUTOR: Bruno Luis Ferreira
@@ -17,12 +18,23 @@ FROM
 WHERE
     oi.issotrx = 'Y'
 AND
-    oi.cof_ComposesCashFlow = 'Y'
+   oi.cof_ComposesCashFlow = 'Y'
 AND 
-    oi.cof_openamtconverted >0
+   oi.cof_openamtconverted > 0
+ 
 AND 
      oi.daysdue >1 
+
 AND
-     oi.ad_client_id = (SELECT s.ad_client_id
-                  from ad_session s 
-                  where s.ad_session_id = {{LOGON}})        
+      (case WHEN {{TipoP}}='01' then 
+                        oi.ad_org_id IN (1000001) 
+           WHEN {{TipoP}}='02' then 
+                        oi.ad_org_id IN (5000000) 
+           WHEN {{TipoP}}='03' then 
+                        oi.ad_org_id IN (5000004) 
+           WHEN {{TipoP}}='98' then 
+                        oi.ad_org_id IN (5000000,1000001) 
+           else 
+                        oi.ad_org_id IN (5000004,5000000,1000001)
+           end )     
+
