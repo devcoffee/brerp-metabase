@@ -1,6 +1,6 @@
 /*
 ######################################################################################################################################
-GRAFICO: Títulos Bancários por Tipo Integração
+GRAFICO: Títulos Bancários por Tipo carteira   
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS: Lista os itens AR que estão alocados em operações bancárias classificando  nos tipos de carteira (descontada, simples, viculada etc)
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.Tradado operações 

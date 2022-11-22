@@ -1,6 +1,6 @@
 /*
 ######################################################################################################################################
-GRAFICO: Contas a receber em atraso (Risco)
+GRAFICO: Contas a receber  (Risco)
 AUTOR: Bruno Luis Ferreira
 COMENTÁRIOS:Efetua a somatória de todos os  itens em aberto AR, considerando os registros que consideream compõem fluxo de caixa 
 O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
