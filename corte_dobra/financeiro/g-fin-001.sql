@@ -1,14 +1,3 @@
-/*
-######################################################################################################################################
-GRAFICO: Saldos por conta Bancária
-AUTOR: Bruno Luis Ferreira
-COMENTÁRIOS: Soma dos pagamentos completados, fechados , estornados e  anulados, de contas que compõem fluxo de caixa, classificando 
-o saldo conciliado, não conciliado e projetado(conciliado + não conciliado)  agrupando por conta corrente e organização. 
-O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem a consolidação de todas as Organizações.
-Valores tratatos para  conversão em operações de multimoeda
-######################################################################################################################################
-*/
-
 WITH pagamentos as (
     SELECT 
         CASE 
@@ -16,6 +5,7 @@ WITH pagamentos as (
                  currencyconvert(p.payamt , p.c_currency_id, 297::numeric, p.datetrx::date::timestamp with time zone, p.c_conversiontype_id, p.ad_client_id, p.ad_org_id)
             ELSE 
                  currencyconvert((  p.payamt * -1 ), p.c_currency_id, 297::numeric, p.datetrx::date::timestamp with time zone, p.c_conversiontype_id, p.ad_client_id, p.ad_org_id)
+
         END as Valor,
         CASE 
             WHEN p.isreconciled = 'N'  THEN
@@ -37,15 +27,9 @@ WITH pagamentos as (
         ad_org org  on org.ad_org_id=ba.ad_org_id
     WHERE 
         p.docstatus IN  ('CO', 'CL','RE','VO')
-    --AND
-       -- ba.cof_ComposesCashFlow = 'Y' 
     AND
-        ba.isactive='Y'
-AND
-     p.ad_client_id = (SELECT s.ad_client_id
-                  from ad_session s 
-                  where s.ad_session_id = {{LOGON}})        
-)
+        ba.isactive='Y' 
+  )
 SELECT 
     p.BancoName as banco,
     p.orgname,
