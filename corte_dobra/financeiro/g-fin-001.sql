@@ -9,7 +9,7 @@ WITH pagamentos as (
         END as Valor,
         CASE 
             WHEN p.isreconciled = 'N'  THEN
-                'NCC'
+                'NCC' 
             ELSE
                 'CC'
         END as Tipo,
