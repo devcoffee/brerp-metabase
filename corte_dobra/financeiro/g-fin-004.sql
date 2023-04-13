@@ -8,7 +8,6 @@ O Filtro ocorre apenas por empresa do usuário logado, assim os valore refletem 
 Valores tratatos para  conversão em operações de multimoeda
 ######################################################################################################################################
 */
-
 select
   sum(oi.cof_openamtconverted)
    
